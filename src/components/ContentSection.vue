@@ -2,7 +2,7 @@
 <main>
     <div class="container">
         <div class="box">
-            <DiscCard />
+            <DiscCard :disc="disc" v-for="(disc, i) in discs" :key="i"/>
         </div>
     </div>
 </main>
@@ -17,9 +17,16 @@ export default {
     components: { 
         DiscCard,
         },
+    data(){
+        return {
+            discs: []
+        }
+    },
     mounted(){
         axios.get('https://flynn.boolean.careers/exercises/api/array/music').then((res) => {
-            console.log(res.data)
+            this.discs = res.data.response;
+            console.log(this.discs)
+
         })
     }
 }
@@ -29,7 +36,6 @@ export default {
 @import '../assets/sass/vars';
     main{
         background-color: $dark_blue;
-        height: 100vh;
 
         .box{
             display: flex;
