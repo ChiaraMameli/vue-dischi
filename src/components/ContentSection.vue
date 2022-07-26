@@ -10,12 +10,18 @@
 
 <script>
 import DiscCard from './DiscCard.vue';
+import axios from 'axios';
 
 export default {
     name: "ContentSection",
     components: { 
         DiscCard,
-        }
+        },
+    mounted(){
+        axios.get('https://flynn.boolean.careers/exercises/api/array/music').then((res) => {
+            console.log(res.data)
+        })
+    }
 }
 </script>
 
