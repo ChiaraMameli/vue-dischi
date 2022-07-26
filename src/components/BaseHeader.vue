@@ -1,6 +1,6 @@
 <template>
-  <div>
-  </div>
+<header>
+</header>
 </template>
 
 <script>
@@ -9,6 +9,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    img{
+        color: black
+    }
 </style>
