@@ -21,10 +21,11 @@ export default {
 .card {
     width: calc((100% / 5) - 20px);
     background-color: $light_blue;
-    margin-bottom: 50px;
+    margin: 0 10px 20px 10px;
     padding: 20px;
     color: gray;
     text-align: center;
+
     img{
       max-width: 100%;
       height: auto;

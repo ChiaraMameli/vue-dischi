@@ -1,7 +1,7 @@
 <template>
 <div>
-  <BaseHeader />
-  <ContentSection />
+  <BaseHeader :genres-list="genresList" @change-option="setSelectedGenre"/>
+  <ContentSection :selected-genre="selectedGenre" @fetched-genres="setGenresList"/>
 </div>
 </template>
 
@@ -13,6 +13,20 @@ export default {
   components: {
     BaseHeader,
     ContentSection
+  },
+  data(){
+    return{
+      selectedGenre: '',
+      genresList: [],
+      }
+  },
+  methods: {
+    setSelectedGenre(genre){
+      this.selectedGenre = genre;
+    },
+    setGenresList(genres){
+      this.genresList = genres;
+    }
   }
 }
 </script>

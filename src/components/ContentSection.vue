@@ -1,10 +1,9 @@
 <template>
     <main>
         <div class="container">
-            <SelectForm/>
             <div v-if="isLoading" class="loading-message">Loading..</div>
             <div v-else class="box">
-                <DiscCard :disc="disc" v-for="(disc, i) in discs" :key="i"/>
+                <DiscCard :disc="disc" v-for="(disc, i) in filteredDiscs" :key="i"/>
             </div>
         </div>
     </main>
@@ -13,23 +12,38 @@
 <script>
 import DiscCard from './DiscCard.vue';
 import axios from 'axios';
-import SelectForm from './SelectForm.vue';
 export default {
     name: "ContentSection",
     components: {
     DiscCard,
-    SelectForm
 },
     data(){
         return {
             discs: [],
             isLoading: true,
+            
+        }
+    },
+    props:{
+        selectedGenre: String,
+    },
+    computed:{
+        filteredDiscs(){
+            if(!this.selectedGenre) return this.discs;
+            return this.discs.filter((disc) => disc.genre === this.selectedGenre)
         }
     },
     mounted(){
         axios.get('https://flynn.boolean.careers/exercises/api/array/music').then((res) => {
             this.discs = res.data.response;
             this.isLoading = false;
+
+            const genres = [];
+            this.discs.forEach((disc) => {
+                if(!genres.includes(disc.genre)) genres.push(disc.genre);
+            });
+            this.$emit('fetched-genres', genres)
+
         }).catch(() => {
             alert('Impossibile caricare la pagina');
         }).then(() => {
@@ -50,7 +64,7 @@ export default {
         .box{
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
             padding: 50px 0;
         }
         

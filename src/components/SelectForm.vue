@@ -1,8 +1,8 @@
 <template>
     <div>
-        <select name="genres" id="genres" v-model="selectedOption">
-        <option value="">{{`Choose a ${option}`}}</option>
-        <option :value="option" v-for="option in options" :key="option"></option>
+        <select name="genres" id="genres" v-model="selectedOption" @change="emitChange">
+        <option value="">Choose a option</option>
+        <option v-for="option in options" :key="option" :value="option" >{{option}}</option>
         </select>
     </div>    
 </template>
@@ -18,6 +18,11 @@ export default {
     },
     props:{
         options: Array,
+    },
+    methods:{
+        emitChange(){
+            this.$emit('change-option', this.selectedOption);
+        }
     }
 }
 </script>
