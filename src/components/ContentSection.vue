@@ -1,23 +1,25 @@
 <template>
-<main>
-    <div class="container">
-        <div v-if="isLoading" class="loading-message">Loading..</div>
-        <div v-else class="box">
-            <DiscCard :disc="disc" v-for="(disc, i) in discs" :key="i"/>
+    <main>
+        <div class="container">
+            <SelectForm/>
+            <div v-if="isLoading" class="loading-message">Loading..</div>
+            <div v-else class="box">
+                <DiscCard :disc="disc" v-for="(disc, i) in discs" :key="i"/>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 </template>
 
 <script>
 import DiscCard from './DiscCard.vue';
 import axios from 'axios';
-
+import SelectForm from './SelectForm.vue';
 export default {
     name: "ContentSection",
-    components: { 
-        DiscCard,
-        },
+    components: {
+    DiscCard,
+    SelectForm
+},
     data(){
         return {
             discs: [],
@@ -40,6 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/sass/vars';
+
     main{
         background-color: $dark_blue;
         min-height: calc(100vh - 60px);
@@ -48,10 +51,9 @@ export default {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-
             padding: 50px 0;
         }
-
+        
         .loading-message {
             font-size: 3rem;
             color: #FFF;
